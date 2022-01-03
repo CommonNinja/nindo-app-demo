@@ -15,5 +15,5 @@ REACT_APP_NINJA_PLUGIN_TITLE=       App Name
 
 ## Docs
 
-See full documentation on how to build an app:<br />
-Open [https://docs.commoninja.com](https://docs.commoninja.com).
+See full documentation on how to build an app in our official documentation:<br />
+[https://docs.commoninja.com](https://docs.commoninja.com).
