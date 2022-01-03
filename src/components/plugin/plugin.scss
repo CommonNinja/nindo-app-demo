@@ -1,0 +1,51 @@
+#plugin-wrapper {
+	background: no-repeat center center;
+	background-size: cover;
+	padding: 20px;
+
+	> h2 {
+		font-size: 32px;
+		margin-bottom: 20px;
+		line-height: 1.5em;
+		word-break: break-word;
+	}
+
+	.items-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		justify-content: center;
+
+		&.circles {
+			.item {
+				border-radius: 50em;
+
+				img {
+					aspect-ratio: 1/0.8;
+				}
+			}
+		}
+
+		.item {
+			flex-basis: 200px;
+			background: #fff;
+			border-radius: 3px;
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			margin: 0 15px 15px 0;
+			overflow: hidden;
+ 
+			h4 {
+				font-size: 16px;
+				margin: 0;
+				padding: 10px;
+			}
+
+			img {
+				width: 100%;
+				object-fit: cover;
+				aspect-ratio: 1;
+			}
+		}
+	}
+}
