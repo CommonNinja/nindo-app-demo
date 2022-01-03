@@ -13,36 +13,7 @@ REACT_APP_NINJA_PLUGIN_PATH=        plugin-name
 REACT_APP_NINJA_PLUGIN_TITLE=       App Name
 ```
 
-#### API variables
+## Docs
 
-```
-REACT_APP_PLUGIN_API_URL=           http://localhost:5006
-REACT_APP_USERS_SERVICE_URL=        http://localhost:5001
-```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### Mock Server
-
-We're using mimic for client side mocks. See more info below:
-https://mimic.readme.io/reference
+See full documentation on how to build an app:<br />
+Open [https://docs.commoninja.com](https://docs.commoninja.com).
