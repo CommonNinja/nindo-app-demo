@@ -16,7 +16,7 @@ import './contentSettings.scss';
 
 export const ContentSettingsComp = () => {
 	const [pluginData, updateData] = usePluginData<IPluginData>();
-	const { content } = pluginData.data;
+	const { content } = pluginData;
 	const { items } = content;
 
 	function updateItem(itemId: string, fieldName: string, value: any) {
@@ -79,9 +79,7 @@ export const ContentSettingsComp = () => {
 						maxLength={400}
 						placeholder="Enter image URL"
 						value={item.image}
-						onChange={(e: any) =>
-							updateItem(item.id, 'image', e.target.value)
-						}
+						onChange={(e: any) => updateItem(item.id, 'image', e.target.value)}
 					/>
 				</FormRow>
 				<FormRow flow="column">

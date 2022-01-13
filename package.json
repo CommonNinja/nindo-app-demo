@@ -8,7 +8,7 @@
     "node": "12.16.1"
   },
   "dependencies": {
-    "@commonninja/nindo": "^1.0.1",
+    "@commonninja/nindo": "^1.1.4",
     "@loadable/component": "^5.14.1",
     "@sentry/browser": "^5.30.0",
     "@testing-library/jest-dom": "^4.2.4",

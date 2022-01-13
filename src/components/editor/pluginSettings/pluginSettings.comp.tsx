@@ -12,6 +12,7 @@ import {
 	notificationHelper,
 	usePluginData,
 	Tooltip,
+	usePlugin,
 } from '@commonninja/nindo';
 
 import { IPluginData } from '../../plugin/plugin.types';
@@ -19,8 +20,9 @@ import { IPluginData } from '../../plugin/plugin.types';
 import './pluginSettings.scss';
 
 export const PluginSettingsComp = () => {
-	const [pluginData, updateData] = usePluginData<IPluginData>();
-	const { settings } = pluginData.data;
+	const plugin = usePlugin<IPluginData>();
+	const [, updateData] = usePluginData<IPluginData>();
+	const { settings } = plugin.data;
 	let firstInput: HTMLInputElement | null = null;
 
 	function setSettingField(settingName: string, value: any) {
@@ -58,8 +60,8 @@ export const PluginSettingsComp = () => {
 	return (
 		<ContextMenuWrapper className="plugin-settings">
 			<ContextMenuSection title="General Settings">
-				<NameFieldEditor currentValue={pluginData.name} />
-				<PrivacySelector currentValue={pluginData.privacy} />
+				<NameFieldEditor currentValue={plugin.name} />
+				<PrivacySelector currentValue={plugin.privacy} />
 			</ContextMenuSection>
 			<ContextMenuSection title="Visibility">
 				<FormRow>
