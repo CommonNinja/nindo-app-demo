@@ -35,8 +35,7 @@ export const defaultPluginData = (): IPluginData => ({
 				id: uuidv4(),
 				title: 'Item 2',
 				description: '',
-				image:
-					'https://uploads.commoninja.com/others/1615115540814_store.png',
+				image: 'https://uploads.commoninja.com/others/1615115540814_store.png',
 			},
 			{
 				id: uuidv4(),
