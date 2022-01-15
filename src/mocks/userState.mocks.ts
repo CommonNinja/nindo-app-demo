@@ -5,5 +5,6 @@ export default {
 	planFeaturesData: {
 		customCSS: true,
 		imageUploads: true,
+		numberOfItems: 5,
 	},
 } as IUserStateMocks;
