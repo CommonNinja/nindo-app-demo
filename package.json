@@ -2,17 +2,18 @@
 	"name": "nindo-demo-app",
 	"version": "1.0.0",
 	"private": true,
-	"proxy": "http://localhost:5006/",
+	"proxy": "http://localhost:4000/",
 	"engines": {
-		"npm": "6.13.4",
-		"node": "12.16.1"
+		"npm": "6.x || 8.x",
+		"node": "14.x || 16.x"
 	},
 	"dependencies": {
-		"@commonninja/nindo": "^1.1.56",
+		"@commonninja/nindo": "^1.2.10",
+		"react": ">=17.0.2",
+		"react-dom": ">=17.0.2",
 		"react-scripts": "^4.0.3",
 		"sass": "^1.35.1",
-		"typescript": "^3.9.9",
-		"uuid": "^8.3.2"
+		"typescript": "^4.4.4"
 	},
 	"scripts": {
 		"start": "react-scripts start",
