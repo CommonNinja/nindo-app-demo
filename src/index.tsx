@@ -5,10 +5,10 @@ import { getEditorConfig } from './components/editor/editor.config';
 import { Plugin } from './components/plugin/plugin.comp';
 import { defaultPluginData } from './components/plugin/plugin.default';
 import { IPluginData } from './components/plugin/plugin.types';
-import { IPluginState } from './components/plugin/plugin.state';
+import { IGlobalState } from './components/plugin/plugin.state';
 
 // Initialize Nindo app
-nindoApp<IPluginData, IPluginState>({
+nindoApp<IPluginData, IGlobalState>({
 	editor: {
 		config: getEditorConfig(),
 	},
@@ -16,7 +16,7 @@ nindoApp<IPluginData, IPluginState>({
 		defaultData: getDefaultPlugin(defaultPluginData(), 'My App'),
 		pluginComponent: Plugin,
 	},
-	pluginState: {
+	globalState: {
 		isSomethingGoingOn: true,
 	},
 	mocks: {

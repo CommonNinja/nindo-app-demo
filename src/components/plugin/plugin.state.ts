@@ -1,3 +1,3 @@
-export interface IPluginState {
+export interface IGlobalState {
 	isSomethingGoingOn: boolean;
 }

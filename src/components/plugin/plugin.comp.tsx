@@ -1,8 +1,8 @@
 import React from 'react';
-import { usePlugin, usePluginData, usePluginState } from '@commonninja/nindo';
+import { usePlugin, usePluginData, useGlobalState } from '@commonninja/nindo';
 
 import { IPluginData } from './plugin.types';
-import { IPluginState } from './plugin.state';
+import { IGlobalState } from './plugin.state';
 
 import './plugin.scss';
 
@@ -10,7 +10,7 @@ export const Plugin = () => {
 	const plugin = usePlugin<IPluginData>();
 	const [pluginData] = usePluginData<IPluginData>();
 	const { styles, settings, content } = pluginData;
-	const [pluginState, updatePluginState] = usePluginState<IPluginState>();
+	const [globalState, updateGlobalState] = useGlobalState<IGlobalState>();
 
 	return (
 		<>
@@ -19,13 +19,13 @@ export const Plugin = () => {
 
 			<div
 				onClick={() => {
-					updatePluginState({
-						isSomethingGoingOn: !pluginState.isSomethingGoingOn,
+					updateGlobalState({
+						isSomethingGoingOn: !globalState.isSomethingGoingOn,
 					});
 				}}
 			>
 				<p>
-					{pluginState.isSomethingGoingOn
+					{globalState.isSomethingGoingOn
 						? 'Something is definitely going on '
 						: 'Nothing is going on '}
 					with the plugin state

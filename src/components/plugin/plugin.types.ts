@@ -26,7 +26,7 @@ export interface IPluginSettings {
 }
 
 export interface IPluginStyles {
-	background: CSSProperties;
+	mainWrapper: CSSProperties;
 	title: CSSProperties;
 	description: CSSProperties;
 	item: CSSProperties;

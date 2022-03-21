@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, CSSProperties } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import loadable from '@loadable/component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,6 @@ import {
 	FormRow,
 	ContextMenuWrapper,
 	ContextMenuSection,
-	AssetsGalleryOpener,
 	Loader,
 	CSSPropertiesEditor,
 	TAvailablePropertiesGroups,
@@ -23,6 +22,7 @@ import {
 	SkinPicker,
 	NinjaSlider,
 	ISkin,
+	NoCodeCSSProps,
 } from '@commonninja/nindo';
 
 import { IPluginData } from '../../plugin/plugin.types';
@@ -97,7 +97,6 @@ const defaultCSS = `#plugin-wrapper {
 export const StylesSettingsComp = () => {
 	const [pluginData, updateData] = usePluginData<IPluginData>();
 	const [cssPopupOpened, setCssPopupOpened] = useState<boolean>(false);
-	const [activeStylesProp, setActiveStylesProp] = useState<string | null>(null);
 	const { styles } = pluginData;
 
 	function stylePropChanged(propName: string, value: any) {
@@ -120,34 +119,30 @@ export const StylesSettingsComp = () => {
 		stylePropChanged('customCSS', newValue);
 	}
 
-	function fontChanged(id: string) {
-		stylePropChanged('fontId', id);
-	}
-
 	function renderAdvancedTab() {
 		return (
 			<>
 				<ContextMenuSection title="Custom Styles">
-					<FormRow>
-						<FormLabel>Title</FormLabel>
-						<Button
-							className="customize-btn"
-							color="transparent"
-							onClick={() => setActiveStylesProp('title')}
-						>
-							Customize
-						</Button>
-					</FormRow>
-					<FormRow>
-						<FormLabel>Item</FormLabel>
-						<Button
-							className="customize-btn"
-							color="transparent"
-							onClick={() => setActiveStylesProp('item')}
-						>
-							Customize
-						</Button>
-					</FormRow>
+					<NoCodeCSSProps
+						items={[
+							{
+								propName: 'mainWrapper',
+								label: 'Main Box',
+								value: styles.mainWrapper,
+							},
+							{
+								propName: 'title',
+								label: 'Main Title',
+								value: styles.title,
+							},
+							{
+								propName: 'item',
+								label: 'Item Box',
+								value: styles.item,
+							},
+						]}
+						onChange={(propName, value) => stylePropChanged(propName, value)}
+					/>
 				</ContextMenuSection>
 				<ContextMenuSection title="Custom CSS" className="center">
 					{premiumHelper.getFeatureValue('customCSS') ? (
@@ -170,121 +165,6 @@ export const StylesSettingsComp = () => {
 							<PremiumOpener>Upgrade Now!</PremiumOpener>
 						</p>
 					)}
-				</ContextMenuSection>
-			</>
-		);
-	}
-
-	function renderCSSPropertiesEditor() {
-		let availablePropertiesGroups: TAvailablePropertiesGroups = [];
-
-		switch (activeStylesProp) {
-			case 'background':
-				availablePropertiesGroups = [
-					{
-						name: 'background',
-						openedByDefault: true,
-						displayName: 'Background Styles',
-						cssProperties: [
-							'backgroundColor',
-							'backgroundSize',
-							'backgroundPosition',
-							'backgroundRepeat',
-						],
-					},
-				];
-				break;
-			case 'title':
-			case 'item':
-				availablePropertiesGroups = [
-					{
-						name: 'typography',
-						cssProperties: [
-							'color',
-							'fontSize',
-							'textAlign',
-							'fontWeight',
-							'fontStyle',
-							'lineHeight',
-							'letterSpacing',
-						],
-					},
-					{
-						name: 'spacing',
-						cssProperties: ['margin', 'padding'],
-					},
-				];
-				break;
-		}
-
-		if (!activeStylesProp || !availablePropertiesGroups.length) {
-			return <></>;
-		}
-
-		return (
-			<div className="css-props-editor-wrapper">
-				<Button
-					className="close-css-props-editor"
-					onClick={() => setActiveStylesProp(null)}
-				>
-					<SystemIcon size={20} type="arrow-left" />
-					<span>Back</span>
-				</Button>
-				<CSSPropertiesEditor
-					currentProperties={(styles as any)[activeStylesProp]}
-					onChange={(nextProperties: CSSProperties) =>
-						stylePropChanged(activeStylesProp, nextProperties)
-					}
-					availablePropertiesGroups={availablePropertiesGroups}
-				/>
-			</div>
-		);
-	}
-
-	function renderBackgroundTab() {
-		return (
-			<>
-				<ContextMenuSection
-					title="Background Settings"
-					className="background-settings"
-				>
-					<FormRow>
-						<FormLabel>Image URL</FormLabel>
-						<AssetsGalleryOpener
-							enabled={premiumHelper.getFeatureValue('imageUploads') as boolean}
-							submitCallback={(url) =>
-								cssPropChanged(
-									'background',
-									'backgroundImage',
-									url ? `url(${url})` : ''
-								)
-							}
-						/>
-						<input
-							type="url"
-							maxLength={400}
-							placeholder="Enter image URL"
-							value={
-								styles.background.backgroundImage
-									?.replace('url(', '')
-									.replace(')', '') || ''
-							}
-							onChange={(e: ChangeEvent<HTMLInputElement>) =>
-								cssPropChanged(
-									'background',
-									'backgroundImage',
-									e.target.value ? `url(${e.target.value})` : ''
-								)
-							}
-						/>
-						<Button
-							className="customize-btn"
-							color="transparent"
-							onClick={() => setActiveStylesProp('background')}
-						>
-							Customize
-						</Button>
-					</FormRow>
 				</ContextMenuSection>
 			</>
 		);
@@ -362,7 +242,7 @@ export const StylesSettingsComp = () => {
 				<ContextMenuSection title="Font">
 					<FontFamilySelector
 						selectedFontId={styles.fontId || 'font_open_sans'}
-						updateFont={fontChanged}
+						updateFont={(fontId: string) => stylePropChanged('fontId', fontId)}
 					/>
 				</ContextMenuSection>
 			</>
@@ -381,24 +261,15 @@ export const StylesSettingsComp = () => {
 						id: 'advanced',
 						name: 'Advanced',
 					},
-					{
-						id: 'background',
-						name: 'Background',
-					},
 				]}
 				resolveTabComp={(id) => {
-					if (id === 'basic') {
-						return renderBasicTab();
-					}
-
 					if (id === 'advanced') {
 						return renderAdvancedTab();
 					}
 
-					return renderBackgroundTab();
+					return renderBasicTab();
 				}}
 			/>
-			{activeStylesProp && renderCSSPropertiesEditor()}
 			{cssPopupOpened && (
 				<Popup
 					show={cssPopupOpened}

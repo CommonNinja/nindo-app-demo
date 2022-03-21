@@ -69,7 +69,7 @@ export const PluginSettingsComp = () => {
 						Show Title
 						<Tooltip
 							content="Use tooltips to elaborate more on specific features"
-							direction="right"
+							direction="bottom"
 						/>
 					</FormLabel>
 					<Toggler

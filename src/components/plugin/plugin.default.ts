@@ -12,7 +12,7 @@ export const defaultPluginData = (): IPluginData => ({
 	},
 	styles: {
 		maxItemWidth: 200,
-		background: {},
+		mainWrapper: {},
 		title: {},
 		description: {},
 		item: {},
